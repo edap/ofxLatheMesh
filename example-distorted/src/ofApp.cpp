@@ -97,12 +97,15 @@ void ofApp::update(){
     material.setSpecularColor(specColor.get());
     ofSetBackgroundColor(ofColor(bgColor));
 
-    if(animate){
+    if (animate) {
         lathe.phiLength.set(ofMap(sin(ofGetElapsedTimef()),-1,1,0,TWO_PI));
-        lathe.setScale(ofMap(sin(ofGetElapsedTimef()),-1,1,1,3));
+        if (applyScale) {
+            lathe.setScale(ofMap(sin(ofGetElapsedTimef()),-1,1,1,3));
+        }
+
         lathe.build();
     }
-    if(freqScale >= 3.0){
+    if (freqScale >= 3.0) {
         freqScale = 0;
     }
 }

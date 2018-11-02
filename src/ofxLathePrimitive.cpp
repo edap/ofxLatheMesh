@@ -128,6 +128,8 @@ void ofxLathePrimitive::build(){
             rotatingPoints[j].y = vertex.y;
             rotatingPoints[j].z = vertex.z;
 
+            //rotatingPoints[j] = rotatingPoints[j]*this->getGlobalTransformMatrix();
+
             // uv
             uv.x = i / _segments;
             uv.y = j / ( points.size() - 1 );
