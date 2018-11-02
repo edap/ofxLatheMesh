@@ -193,7 +193,7 @@ See the example `example-distorted`.
 ![example-editor](img/example-editor.jpg)
 
 *example-rotating-points*
-![example-rotating-points](example-img/rotating-points.jpg)
+![example-rotating-points](img/example-rotating-points.jpg)
 
 *example-funky-torus*
 ![example-funky-torus](img/example-funky-torus.jpg)
