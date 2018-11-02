@@ -1,0 +1,5 @@
+*-Debug
+*/bin/*_debug
+*.autosave
+*/bin/*.app
+*.ply

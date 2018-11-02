@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<group>
+	<group>
+		<diffuse_color>97, 217, 49, 255</diffuse_color>
+		<emissive_color>213, 31, 19, 255</emissive_color>
+		<light_color>83, 255, 161, 255</light_color>
+		<bg_color>255, 190, 54, 255</bg_color>
+		<plane_color>97, 217, 49, 255</plane_color>
+		<normal_color>200, 217, 49, 255</normal_color>
+	</group>
+	<deformation_X>
+		<amplit_X>1</amplit_X>
+		<freq_X>1</freq_X>
+		<deform_based_on_angle>1</deform_based_on_angle>
+	</deformation_X>
+	<deformation_Y>
+		<amplit_Y>1</amplit_Y>
+		<freq_Y>1</freq_Y>
+		<deform_based_on_angle>1</deform_based_on_angle>
+	</deformation_Y>
+	<deformation_Z>
+		<amplit_Z>1</amplit_Z>
+		<freq_Z>1</freq_Z>
+		<deform_based_on_angle>1</deform_based_on_angle>
+	</deformation_Z>
+	<lathe_params>
+		<segments>78</segments>
+		<phiStart>1</phiStart>
+		<phiLength>5.96262</phiLength>
+		<flipNormals>0</flipNormals>
+		<closed>0</closed>
+	</lathe_params>
+	<debug>1</debug>
+	<deform_based_on_angle>1</deform_based_on_angle>
+	<amplitScale>1.315</amplitScale>
+	<freqScale>0.64</freqScale>
+	<applyScale>1</applyScale>
+	<rotating_sample>5</rotating_sample>
+	<draw_normal>0</draw_normal>
+	<draw_faces>0</draw_faces>
+	<draw_rotating_points>0</draw_rotating_points>
+	<animate>0</animate>
+</group>
