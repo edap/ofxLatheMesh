@@ -33,7 +33,7 @@ ofParameter<int> segments;
 
 It defines the number of segments that will compose the rotating geometry.
 
-
+---
 ```
 ofParameter<float> phiStart;
 ```
@@ -41,6 +41,7 @@ ofParameter<float> phiStart;
 The initial rotation angle.
 
 
+---
 ```
 ofParameter<float> phiLength;
 ```
@@ -48,6 +49,7 @@ ofParameter<float> phiLength;
 The upper limit of the rotation. A value TWO_PI, for example, means a complete rotation on the y axis
 
 
+---
 ```
 ofParameter<bool> closed = false;
 ```
@@ -55,6 +57,7 @@ ofParameter<bool> closed = false;
 When the first part of the rotating mesh and the last part are close to each other, the mesh will be perfectly closed.
 
 
+---
 ```
 ofParameter<bool> flipNormals = false;
 ```
@@ -62,6 +65,7 @@ ofParameter<bool> flipNormals = false;
 Depending on the order on which the points are inserted, the face of the generated polygon maybe in the inverted direction as expected. This option flip the faces.
 
 
+---
 ```
 ofParameterGroup parameters;
 ```
@@ -69,6 +73,7 @@ ofParameterGroup parameters;
 Contains all the parameter listed above.
 
 
+---
 ```
 vector<glm::vec2> points;
 ```
@@ -86,6 +91,7 @@ void setup(const vector<glm::vec2>points, const int segments, const float phiSta
 Setup a new geometry defining points, segments, phiStart and phiLength.
 
 
+---
 ```
 void build();
 ```
@@ -93,6 +99,7 @@ void build();
 It builds a `ofMesh`.
 
 
+---
 ```
 void clear();
 ```
@@ -100,6 +107,7 @@ void clear();
 It clears the mesh.
 
 
+---
 ```
 void setPoints(vector<glm::vec2> _points);
 ```
@@ -118,6 +126,7 @@ lathe.build();
 ```
 
 
+---
 ```
 vector<glm::vec2> getPoints() const;
 ```
@@ -125,6 +134,7 @@ vector<glm::vec2> getPoints() const;
 Returns the points that are going to be rotated.
 
 
+---
 ```
 vector<glm::vec3> getCurrentRotatingPoints() const;
 ```
@@ -132,6 +142,7 @@ vector<glm::vec3> getCurrentRotatingPoints() const;
 Like `getPoints()`, but it returns the points at the last angle rotation. See the example `example-rotating-points`
 
 
+---
 ```
 std::function<glm::vec3(float, int, int)> addOffset;
 ```
@@ -146,6 +157,7 @@ lathe.addOffset = [](float angle, int segmentIndex, int pointIndex) {
 ```
 
 
+---
 ```
 std::function<glm::vec2(const vector<glm::vec2> points, float, int, int)> editPoint;
 ```
@@ -167,6 +179,7 @@ lathe.editPoint = [offset](const vector<glm::vec2> points, float angle, int segI
 See the example `example-funky-torus`.
 
 
+---
 ```
 std::function<ofColor(float, int, int)> computeColor;
 ```
