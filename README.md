@@ -162,7 +162,7 @@ lathe.addOffset = [](float angle, int segmentIndex, int pointIndex) {
 std::function<glm::vec2(const vector<glm::vec2> points, float, int, int)> editPoint;
 ```
 
-Lambda function that can change the position of the point while rotating. Example:
+Lambda function that changes the position of the point while rotating. Example:
 
 ```cpp
 lathe.editPoint = [offset](const vector<glm::vec2> points, float angle, int segIndex, int pointIndex){
@@ -184,7 +184,7 @@ See the example `example-funky-torus`.
 std::function<ofColor(float, int, int)> computeColor;
 ```
 
-Lambda function that change the color of the point during the rotation. For example:
+Lambda function that changes the color of the point during the rotation. For example:
 
 ```cpp
 int totPoints = lathe.points.size();

@@ -41,7 +41,7 @@ void ofApp::update(){
         //lathe.segments =nSeg;
         lathe.build();
         for(auto p:lathe.getCurrentRotatingPoints()){
-            lineSmall.addVertex(p);
+            line.addVertex(p);
         }
     }
 }
@@ -50,11 +50,9 @@ void ofApp::draw(){
     cam.begin();
     ofPushStyle();
 
-    //lineColor.setHue(30);
     ofSetColor(lineColor);
-    lineSmall.draw();
+    line.draw();
     ofPopStyle();
-    //lathe.drawWireframe();
     cam.end();
 
     ofDrawBitmapString("press a,s,d,e to change the torus", 10, 10);
@@ -149,5 +147,5 @@ void ofApp::keyPressed(int key){
 
 void ofApp::restart(){
     lathe.phiLength = 0;
-    lineSmall.clear();
+    line.clear();
 }

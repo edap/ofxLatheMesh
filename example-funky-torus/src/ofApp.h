@@ -16,8 +16,8 @@ public:
 ofxLathePrimitive lathe;
 ofEasyCam cam;
 
-ofColor lineColor = ofColor(50, 10, 255);
-ofPolyline lineSmall;
+ofColor lineColor = ofColor(1, 247, 236);
+ofPolyline line;
 
 private:
     void restart();
