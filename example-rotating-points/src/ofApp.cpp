@@ -1,7 +1,8 @@
 #include "ofApp.h"
 
 void ofApp::setup(){
-    ofSetBackgroundColor(37, 203, 206);
+    bgOne = ofColor(37, 203, 206);
+    bgTwo = ofFloatColor::yellow;
 }
 
 void ofApp::update(){
@@ -24,9 +25,10 @@ void ofApp::update(){
 }
 
 void ofApp::draw(){
+    ofBackgroundGradient(bgOne, bgTwo);
     cam.begin();
     ofPushStyle();
-    ofSetColor(yellow);
+    ofSetColor(blue);
     lineBig.draw();
     ofSetColor(red);
     lineSmall.draw();

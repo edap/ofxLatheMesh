@@ -13,9 +13,12 @@ class ofApp : public ofBaseApp{
     ofxLathePrimitive lathe;
     ofEasyCam cam;
 
-    ofColor red = ofFloatColor::red;
-    ofColor yellow = ofFloatColor::yellow;
+    ofColor red = ofColor(255, 206, 79);
+    ofColor blue = ofColor(59,159,255);
     ofPolyline lineBig;
     ofPolyline lineSmall;
-		
+
+    ofColor bgOne;
+    ofColor bgTwo;
+
 };
