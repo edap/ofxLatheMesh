@@ -32,7 +32,7 @@ void ofApp::setup(){
     }
 
     lathe.points = updPoints;
-    lathe.build();
+    build();
     camera.setDistance(800);
 
     light.setup();
@@ -89,11 +89,11 @@ void ofApp::draw(){
 }
 
 void ofApp::regenerateInt(int &s){
-    lathe.build();
+    build();
 }
 
 void ofApp::regenerate(float &s){
-    lathe.build();
+    build();
 }
 
 void ofApp::defaultCurve(){
@@ -238,9 +238,8 @@ void ofApp::mouseReleased(int x, int y, int button){
         }
 
         lathe.points = updPoints;
-        lathe.build();
+        build();
     }
-
 }
 
 void ofApp::createPath(){
@@ -257,6 +256,21 @@ void ofApp::createPath(){
 void ofApp::saveMesh(){
     string randomFilename = ofGetTimestampString() + ".ply";
     lathe.getMesh().save(randomFilename);
+}
+
+void ofApp::printPoints(){
+    ofLog() << "POINTS:";
+    for (auto p:lathe.points){
+        auto x = ofToString(p.x);
+        auto y = ofToString(p.y);
+        std::string msg = "points.push_back(glm::vec2("+x+","+y +"));";
+        cout << msg << endl;
+    }
+}
+
+void ofApp::build(){
+    lathe.build();
+    printPoints();
 }
 
 

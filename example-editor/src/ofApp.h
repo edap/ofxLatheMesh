@@ -61,5 +61,7 @@ private:
     ofColor lineColor;
     ofColor bgOne;
     ofColor bgTwo;
+    void printPoints();
+    void build();
 
 };

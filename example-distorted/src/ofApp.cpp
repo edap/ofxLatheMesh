@@ -18,9 +18,9 @@ void ofApp::setup(){
     deformationY.setName("deformation Y");
     deformationZ.setName("deformation Z");
 
-    deformationX.add(amplitX.set("amplit X", 1, 0, 70));
-    deformationY.add(amplitY.set("amplit Y", 1, 0, 70));
-    deformationZ.add(amplitZ.set("amplit Z", 1, 0, 70));
+    deformationX.add(amplitX.set("amplit X", 1, 0, 170));
+    deformationY.add(amplitY.set("amplit Y", 1, 0, 170));
+    deformationZ.add(amplitZ.set("amplit Z", 1, 0, 170));
     deformationX.add(freqX.set("freq X", 1, 1, 70));
     deformationY.add(freqY.set("freq Y", 1, 1, 70));
     deformationZ.add(freqZ.set("freq Z", 1, 1, 70));
@@ -62,18 +62,62 @@ void ofApp::setup(){
 
     lineColor = ofColor(250, 150, 10);
 
-    int totPoints = lathe.points.size();
-    lathe.computeColor = [totPoints](float angle, int segmentIter, int pointIter) {
-        float hue = ofMap(sin(angle*3.), -1, 1, 125, 200);
+
+    vector<glm::vec2> points;
+//    for ( int i = 0; i < 12; i ++ ) {
+//        points.push_back( glm::vec2( sin( i * 0.2 ) * 100 + 5, ( i + 2) * 20 ) );
+//    }
+    points.push_back(glm::vec2(96,251));
+    points.push_back(glm::vec2(151.721,300.454));
+    points.push_back(glm::vec2(198.354,340.636));
+    points.push_back(glm::vec2(236.458,372.172));
+    points.push_back(glm::vec2(266.592,395.688));
+    points.push_back(glm::vec2(289.312,411.812));
+    points.push_back(glm::vec2(305.178,421.172));
+    points.push_back(glm::vec2(314.747,424.394));
+    points.push_back(glm::vec2(318.576,422.104));
+    points.push_back(glm::vec2(317.224,414.93));
+    points.push_back(glm::vec2(311.25,403.5));
+    points.push_back(glm::vec2(301.211,388.439));
+    points.push_back(glm::vec2(287.664,370.376));
+    points.push_back(glm::vec2(271.169,349.937));
+    points.push_back(glm::vec2(252.282,327.748));
+    points.push_back(glm::vec2(231.562,304.438));
+    points.push_back(glm::vec2(209.568,280.632));
+    points.push_back(glm::vec2(186.857,256.958));
+    points.push_back(glm::vec2(163.986,234.044));
+    points.push_back(glm::vec2(141.514,212.515));
+    points.push_back(glm::vec2(120,193));
+    points.push_back(glm::vec2(133.74,181.371));
+    points.push_back(glm::vec2(143.401,170.71));
+    points.push_back(glm::vec2(149.343,160.904));
+    points.push_back(glm::vec2(151.928,151.84));
+    points.push_back(glm::vec2(151.516,143.406));
+    points.push_back(glm::vec2(148.467,135.49));
+    points.push_back(glm::vec2(143.143,127.979));
+    points.push_back(glm::vec2(135.904,120.76));
+    points.push_back(glm::vec2(127.111,113.721));
+    points.push_back(glm::vec2(117.125,106.75));
+    points.push_back(glm::vec2(106.306,99.7338));
+    points.push_back(glm::vec2(95.016,92.56));
+    points.push_back(glm::vec2(83.6146,85.1162));
+    points.push_back(glm::vec2(72.463,77.29));
+    points.push_back(glm::vec2(61.9219,68.9688));
+    points.push_back(glm::vec2(52.352,60.04));
+    points.push_back(glm::vec2(44.1141,50.3912));
+    points.push_back(glm::vec2(37.569,39.91));
+    points.push_back(glm::vec2(33.0774,28.4838));
+    points.push_back(glm::vec2(31,16));
+    lathe.setPoints(points);
+
+    lathe.computeColor = [points](float angle, int segmentIter, int pointIter) {
+        auto totPoints = points.size();
+        float amp = sin(angle) * 10.0;
+        float hue = ofMap(sin(pointIter*amp), -1, 1, 125, 200);
         //float hue = ofMap(sin(pointIter* 4.0), 0, totPoints-1, 0, 255);
         return ofColor().fromHsb(hue, 255, 255);
     };
-    vector<glm::vec2> points;
-    for ( int i = 0; i < 12; i ++ ) {
-        points.push_back( glm::vec2( sin( i * 0.2 ) * 100 + 5, ( i + 2) * 20 ) );
-    }
-    //lathe.setPoints(points);
-
+    lathe.segments = 200;
     lathe.build();
     lathe.setParent(parent);
 
