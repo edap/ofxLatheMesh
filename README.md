@@ -1,5 +1,8 @@
 # ofxLathePrimitive
 
+[![Build status](https://ci.appveyor.com/api/projects/status/hwecbliusfhxd5nf?svg=true)](https://ci.appveyor.com/project/edap/ofxlatheprimitive)
+[![Build Status](https://travis-ci.org/edap/ofxLathePrimitive.svg?branch=master)](https://travis-ci.org/edap/ofxLathePrimitive)
+
 ![ofxLathePrimitive](img/ofxLathePrimitive.jpg)
 
 This addon generates lathe geometries. [Lathe geometries](https://en.wikipedia.org/wiki/Lathe_(graphics)) are geometries produced by rotating some points around a fixed axis, in my addon and in many other similar program, the up axis.
