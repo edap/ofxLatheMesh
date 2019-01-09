@@ -1,9 +1,9 @@
 # ofxLathePrimitive
 
-[![Build status](https://ci.appveyor.com/api/projects/status/hwecbliusfhxd5nf?svg=true)](https://ci.appveyor.com/project/edap/ofxlatheprimitive)
-[![Build Status](https://travis-ci.org/edap/ofxLathePrimitive.svg?branch=master)](https://travis-ci.org/edap/ofxLathePrimitive)
+[![Build status](https://ci.appveyor.com/api/projects/status/hwecbliusfhxd5nf?svg=true)](https://ci.appveyor.com/project/edap/ofxlathemesh)
+[![Build Status](https://travis-ci.org/edap/ofxLatheMesh.svg?branch=master)](https://travis-ci.org/edap/ofxLatheMesh)
 
-![ofxLathePrimitive](img/ofxLathePrimitive.jpg)
+![ofxLatheMesh](img/ofxLatheMesh.jpg)
 
 This addon generates lathe geometries. [Lathe geometries](https://en.wikipedia.org/wiki/Lathe_(graphics)) are geometries produced by rotating some points around a fixed axis, in my addon and in many other similar program, the up axis.
 
@@ -12,7 +12,7 @@ This addon is very close to that one that comes from [THREE.js](https://threejs.
 
 ## Usage example
 
-A lathe primitive comes with its default, this minimal example is enough to have a lathe geometry in your scene.
+A lathe mesh comes with its default, this minimal example is enough to have a lathe geometry in your scene.
 
 ```cpp
 void ofApp::setup(){
@@ -99,7 +99,7 @@ Setup a new geometry defining points, segments, phiStart and phiLength.
 void build();
 ```
 
-It builds a `ofMesh`.
+It builds a `ofVboMesh`.
 
 
 ---
