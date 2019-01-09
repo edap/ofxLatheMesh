@@ -1,4 +1,4 @@
-#include "ofxLathePrimitive.h"
+#include "ofxLatheMesh.h"
 
 static vector<glm::vec2> defaultPoints(){
     vector<glm::vec2> points;
@@ -18,7 +18,7 @@ static const ofxLathePrimitiveOptions defaultOptions = {
     1.0
 };
 
-ofxLathePrimitive::ofxLathePrimitive(){
+ofxLatheMesh::ofxLatheMesh(){
     points = defaultOptions.points;
     segments = defaultOptions.segments;
     phiStart = defaultOptions.phiStart;
@@ -29,8 +29,9 @@ ofxLathePrimitive::ofxLathePrimitive(){
     setupGui();
 };
 
-void ofxLathePrimitive::setupGui(){
+void ofxLatheMesh::setupGui(){
     parameters.clear();
+    parameters.setName("lathe");
     parameters.add(segments.set("segments", segments.get(), 1, segments.get()* 20));
     parameters.add(phiStart.set("phiStart", phiStart.get(), 0, float(PI*2)));
     parameters.add(phiLength.set("phiLength", phiLength.get(), 0, float(PI*2)));
@@ -41,7 +42,7 @@ void ofxLathePrimitive::setupGui(){
     rotatingPoints.resize(points.size());
 }
 
-void ofxLathePrimitive::setup(const vector<glm::vec2> _points, const int _segments, const float _phiStart, const float _phiLength){
+void ofxLatheMesh::setup(const vector<glm::vec2> _points, const int _segments, const float _phiStart, const float _phiLength){
     points = _points;
     segments = _segments;
     phiStart = _phiStart;
@@ -50,28 +51,34 @@ void ofxLathePrimitive::setup(const vector<glm::vec2> _points, const int _segmen
     setupGui();
 }
 
-void ofxLathePrimitive::clear(){
-    getMesh().clear();
+void ofxLatheMesh::clear(){
+    mesh.clear();
+    //rotatingPoints.clear();
+    //points.clear();
 };
 
-void ofxLathePrimitive::setPoints(vector<glm::vec2> _points){
+void ofxLatheMesh::draw(){
+    mesh.draw();
+};
+
+void ofxLatheMesh::setPoints(vector<glm::vec2> _points){
     rotatingPoints.clear();
     points = _points;
     rotatingPoints.resize(_points.size());
 };
 
-vector<glm::vec2> ofxLathePrimitive::getPoints() const {
+vector<glm::vec2> ofxLatheMesh::getPoints() const {
     return points;
 };
 
-vector<glm::vec3> ofxLathePrimitive::getCurrentRotatingPoints() const {
+vector<glm::vec3> ofxLatheMesh::getCurrentRotatingPoints() const {
     return rotatingPoints;
 };
 
-void ofxLathePrimitive::build(){
+void ofxLatheMesh::build(){
     // credits to
     // https://github.com/mrdoob/three.js/blob/master/src/geometries/LatheGeometry.js
-    getMesh().clear();
+    mesh.clear();
     unsigned int _segments = std::floor( segments.get()) > 0? segments.get() : defaultOptions.segments;
     float _phiLength = ofClamp(phiLength, 0, float(PI * 2));
     float _phiStart = ofClamp(phiStart, 0, float(PI * 2));
@@ -86,8 +93,6 @@ void ofxLathePrimitive::build(){
     vector<glm::vec2> editedPoints;
     unsigned int i, j;
 
-
-
     float inverseSegments = float(1.) / float(_segments);
 
     for (i = 0; i <= _segments; i ++) {
@@ -100,7 +105,7 @@ void ofxLathePrimitive::build(){
             // on the rotation take the same position as that one that
             // made the first round.
             if (closed && i == _segments && almostClosed) {
-                vertex = getMesh().getVertices().at(0+j);
+                vertex = mesh.getVertices().at(0+j);
             } else {
                 // deformations happen if lambdas are set.
                 point = points[j];
@@ -116,11 +121,11 @@ void ofxLathePrimitive::build(){
                 vertex.z = point.x * cosv + offset.z;
             }
 
-            getMesh().addVertex(vertex);
+            mesh.addVertex(vertex);
 
             // add vertex color if present
             if (computeColor) {
-                getMesh().addColor(computeColor(phi, i, j));
+                mesh.addColor(computeColor(phi, i, j));
             }
 
             // save current rotating points, useful for animation
@@ -133,7 +138,7 @@ void ofxLathePrimitive::build(){
             // uv
             uv.x = i / _segments;
             uv.y = j / ( points.size() - 1 );
-            getMesh().addTexCoord(uv);
+            mesh.addTexCoord(uv);
         }
     }
 
@@ -153,27 +158,27 @@ void ofxLathePrimitive::build(){
             // on the insertion order the of vertices in points array.
             // Therefore, an option to flip the normals was added.
             if (flipNormals) {
-                getMesh().addTriangle( a, b, d );
-                getMesh().addTriangle( b, c, d );
+                mesh.addTriangle( a, b, d );
+                mesh.addTriangle( b, c, d );
             } else {
-                getMesh().addTriangle( b, a, d );
-                getMesh().addTriangle( d, c, b );
+                mesh.addTriangle( b, a, d );
+                mesh.addTriangle( d, c, b );
             }
         }
     }
 
-    calcNormals(getMesh());
+    calcNormals(mesh);
     if (almostClosed){
         // if the geometry is closed, we need to average the normals along the seam.
         // because the corresponding vertices are identical (but still have different UVs).
-        fixNormalForClosedGeometry(getMesh(), points.size(), _segments);
+        fixNormalForClosedGeometry(mesh, points.size(), _segments);
     }
     
-    getMesh().enableNormals();
+    mesh.enableNormals();
 };
 
 
-void ofxLathePrimitive::calcNormals(ofMesh &mesh){
+void ofxLatheMesh::calcNormals(ofMesh &mesh){
     for( unsigned int i=0; i < mesh.getVertices().size(); i++ ) mesh.addNormal(glm::vec3(0,0,0));
 
     for ( unsigned int i=0; i < mesh.getIndices().size(); i+=3  ) {
@@ -192,7 +197,7 @@ void ofxLathePrimitive::calcNormals(ofMesh &mesh){
         mesh.getNormals()[ic] = glm::normalize(no + mesh.getNormals()[ic]);
     }
 };
-void ofxLathePrimitive::fixNormalForClosedGeometry( ofMesh & mesh, const unsigned long pointSize, const unsigned int segments){
+void ofxLatheMesh::fixNormalForClosedGeometry( ofMesh & mesh, const unsigned long pointSize, const unsigned int segments){
     // via https://github.com/mrdoob/three.js/blob/master/src/geometries/LatheGeometry.js
 
     auto n1 = glm::vec3();

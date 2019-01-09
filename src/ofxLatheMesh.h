@@ -8,13 +8,15 @@ struct ofxLathePrimitiveOptions{
     float phiLength;
 };
 
-class ofxLathePrimitive : public of3dPrimitive {
+class ofxLatheMesh : public of3dPrimitive {
 public:
-    ofxLathePrimitive();
+    ofxLatheMesh();
     void setup(const vector<glm::vec2>points, const int segments, const float phiStart, const float phiLength);
 
     void build();
     void clear();
+    void draw();
+
     void setPoints(vector<glm::vec2> _points);
     vector<glm::vec2> getPoints() const;
     vector<glm::vec3> getCurrentRotatingPoints() const;
@@ -32,9 +34,13 @@ public:
     std::function<glm::vec2(const vector<glm::vec2> points, const float, const int, const int)> editPoint;
     std::function<ofColor(const float, const int, const int)> computeColor;
 
+    ofVboMesh mesh;
+
 private:
     void setupGui();
     void calcNormals(ofMesh &mesh);
     void fixNormalForClosedGeometry( ofMesh & mesh, const unsigned long pointSize, const unsigned int segments);
     vector<glm::vec3> rotatingPoints;
+
+
 };
