@@ -1,4 +1,4 @@
-# ofxLathePrimitive
+# ofxLatheMesh
 
 [![Build status](https://ci.appveyor.com/api/projects/status/hwecbliusfhxd5nf?svg=true)](https://ci.appveyor.com/project/edap/ofxlathemesh)
 [![Build Status](https://travis-ci.org/edap/ofxLatheMesh.svg?branch=master)](https://travis-ci.org/edap/ofxLatheMesh)
