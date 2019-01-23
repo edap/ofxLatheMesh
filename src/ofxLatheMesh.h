@@ -15,7 +15,6 @@ public:
 
     void build();
     void clear();
-    void draw();
 
     void setPoints(vector<glm::vec2> _points);
     vector<glm::vec2> getPoints() const;
@@ -28,6 +27,7 @@ public:
     ofParameter<bool> closed = false;
     ofParameter<bool> flipNormals = false;
     vector<glm::vec2> points;
+    int currentSegment = 0;
 
 
     std::function<glm::vec3(const float, const int, const int)> addOffset;

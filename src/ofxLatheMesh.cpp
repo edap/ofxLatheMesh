@@ -53,12 +53,9 @@ void ofxLatheMesh::setup(const vector<glm::vec2> _points, const int _segments, c
 
 void ofxLatheMesh::clear(){
     mesh.clear();
+    currentSegment = 0;
     //rotatingPoints.clear();
     //points.clear();
-};
-
-void ofxLatheMesh::draw(){
-    mesh.draw();
 };
 
 void ofxLatheMesh::setPoints(vector<glm::vec2> _points){
@@ -78,11 +75,10 @@ vector<glm::vec3> ofxLatheMesh::getCurrentRotatingPoints() const {
 void ofxLatheMesh::build(){
     // credits to
     // https://github.com/mrdoob/three.js/blob/master/src/geometries/LatheGeometry.js
-    mesh.clear();
+    clear();
     unsigned int _segments = std::floor( segments.get()) > 0? segments.get() : defaultOptions.segments;
     float _phiLength = ofClamp(phiLength, 0, float(PI * 2));
     float _phiStart = ofClamp(phiStart, 0, float(PI * 2));
-
     bool almostClosed = ((PI * 2) - double(_phiLength)) < 0.01;
 
     // cached
@@ -140,6 +136,7 @@ void ofxLatheMesh::build(){
             uv.y = j / ( points.size() - 1 );
             mesh.addTexCoord(uv);
         }
+        currentSegment ++;
     }
 
     unsigned long base;
@@ -173,13 +170,14 @@ void ofxLatheMesh::build(){
         // because the corresponding vertices are identical (but still have different UVs).
         fixNormalForClosedGeometry(mesh, points.size(), _segments);
     }
-    
+
     mesh.enableNormals();
 };
 
-
 void ofxLatheMesh::calcNormals(ofMesh &mesh){
-    for( unsigned int i=0; i < mesh.getVertices().size(); i++ ) mesh.addNormal(glm::vec3(0,0,0));
+    mesh.getNormals().clear(); // per build segment, potresti aggiungere
+    // i nuovi normals invece di pulire tutto
+    for( unsigned int i=0; i < mesh.getVertices().size(); i++ ) mesh.addNormal(glm::vec3(0.0f,0.0f,0.0f));
 
     for ( unsigned int i=0; i < mesh.getIndices().size(); i+=3  ) {
         const unsigned int ia = mesh.getIndices()[i];
