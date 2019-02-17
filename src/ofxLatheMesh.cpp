@@ -106,15 +106,17 @@ void ofxLatheMesh::build(){
                 // deformations happen if lambdas are set.
                 point = points[j];
                 if (editPoint) {
-                    point = editPoint(points, phi, i, j);
-                }
-                if (addOffset) {
-                    offset = addOffset(phi, i, j);
+                    vertex = editPoint(points, phi, i, j);
+                }else{
+                    if (addOffset) {
+                        offset = addOffset(phi, i, j);
+                    }
+
+                    vertex.x = point.x * sinv + offset.x;
+                    vertex.y = point.y + offset.y;
+                    vertex.z = point.x * cosv + offset.z;
                 }
 
-                vertex.x = point.x * sinv + offset.x;
-                vertex.y = point.y + offset.y;
-                vertex.z = point.x * cosv + offset.z;
             }
 
             mesh.addVertex(vertex);

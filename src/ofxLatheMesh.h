@@ -31,10 +31,11 @@ public:
 
 
     std::function<glm::vec3(const float, const int, const int)> addOffset;
-    std::function<glm::vec2(const vector<glm::vec2> points, const float, const int, const int)> editPoint;
+    std::function<glm::vec3(const vector<glm::vec2>, const float, const int, const int)> editPoint;
     std::function<ofColor(const float, const int, const int)> computeColor;
 
     ofVboMesh mesh;
+
 
 private:
     void setupGui();
